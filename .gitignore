@@ -4,6 +4,7 @@ del/
 .zed/
 *.vim
 sess
+__pycache__/
 
 *.exe
 del*
@@ -65,3 +66,62 @@ exec/
 
 #others
 *.ini
+
+#---------------------- python related projects ----------------
+# Bytecode files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Virtualenv
+# virtualenv
+.venv/
+venv/
+
+# PyInstaller
+# PyInstaller creates a dist/ folder and other files
+dist/
+build/
+*.egg-info/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+.coverage
+.coverage.*
+*.cover
+nosetests.xml
+coverage.xml
+*.hypothesis/
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.vscode/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Python type checking
+.mypy_cache/
+.pytype/
+
+# Pytest
+.cache/
+
