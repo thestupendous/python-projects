@@ -11,3 +11,6 @@
    - Pop + → A B C * +.
 
 The resulting postfix expression is: A B C * +
+
+## things to add
+- [ ] Input verification -> brackets matching, integer checking etc
