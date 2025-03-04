@@ -27,5 +27,8 @@ The resulting postfix expression is: A B C * +
 ## things to add
  - [x] brackets support
 - [ ] Input verification -> 
-  - [ ] integer checking (negative number in start)
+  - [ ] numbers checking 
+     - [ ] decimal numbers
+     - [ ] negative number in start
+  - [ ] text without spaces (exm- 1+2, (2- 5 )\*2 )
 
