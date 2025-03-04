@@ -1,4 +1,37 @@
-from stack import stack
+class stack():
+    """
+      stack implementation
+      methods -
+        push_(val)
+        pop_()
+        top_()
+        print_()
+        size_()
+        empty_()
+    """
+    def __init__(self):
+        self.data = []
+        self.top = None
+    def push_(self,val):
+        self.data.append(val)
+        self.top = val
+    def pop_(self):
+        # print("popping -> ",st.top_())
+        if len(self.data) > 0:
+            tem = self.data[-1]
+            self.data.pop(-1)
+            top = tem
+            return tem
+        else:
+            return None
+    def top_(self):
+        return self.data[-1]
+    def empty_(self):
+        return len(self.data) == 0
+    def print_(self):
+        print(self.data)
+    def size_(self):
+        return len(self.data)
 
 def infix_to_postfix(ii):
     priority = { '(':0, '+':1, '-':1 ,'/':2 ,'*':2 }
