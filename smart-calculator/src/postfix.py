@@ -2,10 +2,10 @@
   Convert infix to postfix notation
 """
 
-from stack import stack
+from src.stack import stack
 
 def infix_to_postfix(ii):
-    priority = { '+':1, '-':1 ,'/':2 ,'*':2 }
+    priority = { '(':0, '+':1, '-':1 ,'/':2 ,'*':2 }
     ii = list(ii.split())
 
     st = stack()
@@ -15,8 +15,23 @@ def infix_to_postfix(ii):
         if i.isnumeric():
             oo.append(i)
         elif i.isascii():
+            if i == '(':
+                st.push_(i)
+                continue
+            
+            elif i == ')':
+                while not st.empty_():
+                    if st.top_() == '(':
+                        st.pop_()
+                        break
+                    op = st.top_()
+                    oo.append(op)
+                    st.pop_()
+                continue
+
             if st.empty_():
                 st.push_(i)
+
             elif priority[i] <= priority[st.top_()]:
                 while not st.empty_() :
                     if priority[i] <= priority[st.top_()]:
@@ -40,7 +55,9 @@ def infix_to_postfix(ii):
 if __name__ == '__main__':
 
     # testing
-    ii = '7 - 2 + 3 * 2 / 3 - 1 / 10 + 5'
+    # ii = '7 - 2 + 3 * 2 / 3 - 1 / 10 + 5'
+    ii = '7 - 2 +  ( 3 * 2 / 3 - )  1 / 10 + 5'
+
     print("result: ",infix_to_postfix(ii))
     print(stack.__doc__)
 

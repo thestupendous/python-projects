@@ -8,7 +8,7 @@ def log(a,end_="\n"):
     print("Log: "+str(a),end=end_)
 
 def infix_to_postfix(ii):
-    priority = { '+':1, '-':1 ,'/':2 ,'*':2, '(':3 }
+    priority = { '+':1, '-':1 ,'/':2 ,'*':2, '(':0 }
     ii = list(ii.split())
     log(len(ii))
     log(ii)
@@ -35,8 +35,10 @@ def infix_to_postfix(ii):
                     oo.append(op)
                     st.pop_()
                 continue
+
             if st.empty_():
                 st.push_(i)
+
             elif priority[i] <= priority[st.top_()]:
                 log("At "+i+" need to pop ",end_="")
                 while not st.empty_() :

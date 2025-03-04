@@ -2,7 +2,7 @@
 Evaluate postfix form to calculate final result
 """
 
-from stack import stack
+from src.stack import stack
 
 def apply(arg1,arg2,op):
     if op=='+':

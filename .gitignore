@@ -125,3 +125,47 @@ coverage.xml
 # Pytest
 .cache/
 
+# ----------------- golang project related -----------------------------
+vendor/
+webserver/
+del*.*
+del*
+*~
+*out
+
+# Go binaries
+/bin/
+/obj/
+
+# Go workspace
+/vendor/
+
+# Go IDE settings
+.idea/
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Go test result
+*.test
+
+# Go coverage reports
+*.cov
+*.out
+
+# Go build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go cache
+*.go.cache/
+
+# Go modules
+go.sum
+
+
