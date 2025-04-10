@@ -25,7 +25,9 @@ You can solve expressions like these**
 The resulting postfix expression is: A B C * +
 
 ## things to add
- - [x] brackets support
+- [ ] input checking ( if brackets matching, syntax is correct exmp - ` ( (  2 - 2 -2 ) * ) * 0 ` )
+- [ ] Text without space (example - `2+3` instead of `2 + 3`)
+- [x] brackets support
 - [ ] Input verification -> 
   - [ ] numbers checking 
      - [ ] decimal numbers
