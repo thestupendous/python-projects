@@ -9,6 +9,7 @@ You can solve expressions like these**
 ## things working
 - operations 4 - (+/-/÷/x)
 - brackets ( `(` and `)` ) support for easy typing
+- note: all entities (numbers, operators, brackets) must be separated by at least one space
 
 ## Convert the infix expression A + B * C to postfix
 
@@ -33,4 +34,3 @@ The resulting postfix expression is: A B C * +
      - [ ] decimal numbers
      - [ ] negative number in start
   - [ ] text without spaces (exm- 1+2, (2- 5 )\*2 )
-
