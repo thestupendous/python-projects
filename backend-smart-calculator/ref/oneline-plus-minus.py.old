@@ -1,0 +1,38 @@
+def operate(num1,op,num2):
+    if op=='+':
+        return num1+num2
+    elif op=='-':
+        return num1-num2
+    elif op=='/':
+        return num1/num2
+    elif op=='*':
+        return num1*num2
+aa = input()
+
+input_list = aa.split()
+print(input_list)
+# num1,num2,op
+counter = 0
+ans = 0
+op = ''
+for item in input_list:
+    if item.isnumeric():
+        print("found number!")
+        if counter==0:
+            print("\tpehla")
+            num1 = int(item)
+            counter += 1
+        if counter==2:
+            print("\tteesra")
+            num2 = int(item)
+            #process op
+            ans += operate(num1,op,num2)
+            print("now ",num1,op,num2,', total ans = ',ans)
+            counter=0
+            op=''
+    elif item.isascii():
+        print("\tdusra")
+        op = item
+        counter += 1
+
+print("result : ",ans)
