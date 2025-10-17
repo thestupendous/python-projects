@@ -48,7 +48,9 @@ api = Api(app,
           validate=True
           )
 diagController = Namespace("diagnosis", path="/diag", description="Diagnosis records api controller")
+getDiagsController = Namespace("get all diagnosises", path="/diags", description="get all list of diagnosises")
 api.add_namespace(diagController)
+api.add_namespace(getDiagsController)
 
 
 # TODO mongo db will replace this
@@ -76,11 +78,33 @@ diagPatients = diagController.model("diagnosisPatientsModel",{
     'patient_name': fields.String(required=True, description="patient name")
 })
 
-@diagController.route("/")
-class Diagnosis(Resource):
+diagID = diagController.model("diagnosisID",{
+    'diagnosis_id': fields.Integer(required=True, description="diagnosis ID"),
+})
+
+@getDiagsController.route("/")
+class GetDiagnosises(Resource):
+    @getDiagsController.marshal_list_with(diagFullModel)
     def get(self):
         # TODO db: all records
-        return json.dumps(diagnosis_records, cls=diagnosis_model_encoder), 201
+        return_string = json.dumps(diagnosis_records, indent=4, cls=diagnosis_model_encoder)
+        return_data = json.loads(return_string)
+        print("returning this ->",return_string,"<-")
+        return return_data, 201
+
+@diagController.route("/")
+class Diagnosis(Resource):
+    @diagController.expect(diagID)
+    # @diagController.marshal_with(diagFullModel)
+    def get(self):
+        # TODO db: all records
+        get_id = diagController.payload['diagnosis_id']
+        for diag in diagnosis_records:
+            if diag.diagnosis_id == get_id:
+                print("found id, for returning",get_id)
+                return_obj = json.loads(json.dumps(diag,cls=diagnosis_model_encoder))
+                return return_obj,201
+        return {"error":"diagnosis id not found!"},404
 
     @diagController.expect(diagModel)
     def post(self):
@@ -98,9 +122,39 @@ class Diagnosis(Resource):
         diagnosis_records.append(new_diag)
         return {"message": "record added", "diagnosis_id": diagId}, 201
 
+    @diagController.expect(diagFullModel)
+    def put(self):
+        got_record = diagController.payload
 
+        # TODO DB
+        for diag in diagnosis_records:
+            if diag.diagnosis_id == got_record['diagnosis_id']:
+                print("found id, for updating",got_record['diagnosis_id'])
+                diag.patient_id = got_record['patient_id'] 
+                diag.patient_name = got_record['patient_name'] 
+                diag.diagnosis = got_record['diagnosis'] 
+                diag.date = got_record['date'] 
 
+                return_obj = json.loads(json.dumps(diag,cls=diagnosis_model_encoder))
+                return return_obj,201
+        return {"error": "Diagnosis ID not found"}, 404
 
+    @diagController.expect(diagID)
+    def delete(self):
+        got_record = diagController.payload
+        remove_id = got_record['diagnosis_id']
+
+        # TODO DB
+        remove_ind=-1
+        for ind in range(len(diagnosis_records)):
+            if diagnosis_records[ind].diagnosis_id == remove_id:
+                remove_ind = ind
+                print("found id, for deleting",remove_id)
+        if remove_ind>-1:
+            diagnosis_records.pop(remove_ind)
+            return {"success": "Removed diagnosis Id {}".format(remove_id)}, 404
+        else:
+            return {"error": "Id not found"}, 404
 
 
 if __name__ == '__main__':
