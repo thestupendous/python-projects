@@ -21,6 +21,8 @@ from flask_restx import Api
 from src.controllers.diagnosis import diagController, getDiagsController
 
 
+
+
 app = Flask(__name__)
 api = Api(app,
           title="Diagnosis records of Hospital Amrit",
