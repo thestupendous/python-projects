@@ -1,222 +1,223 @@
 {
-  "swagger": "2.0",
-  "basePath": "/",
-  "paths": {
-    "/diag/": {
-      "put": {
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "operationId": "put_diagnosis",
-        "parameters": [
-          {
-            "name": "payload",
-            "required": true,
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/diagnosisFullModel"
+    "swagger": "2.0",
+    "basePath": "/",
+    "paths": {
+        "/diag/": {
+            "delete": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "operationId": "delete_diagnosis",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/diagnosisID"
+                        }
+                    }
+                ],
+                "tags": [
+                    "diagnosis"
+                ]
+            },
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "operationId": "post_diagnosis",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/diagnosisModel"
+                        }
+                    }
+                ],
+                "tags": [
+                    "diagnosis"
+                ]
+            },
+            "put": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "operationId": "put_diagnosis",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/diagnosisFullModel"
+                        }
+                    }
+                ],
+                "tags": [
+                    "diagnosis"
+                ]
             }
-          }
-        ],
-        "tags": [
-          "diagnosis"
-        ]
-      },
-      "post": {
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
         },
-        "operationId": "post_diagnosis",
-        "parameters": [
-          {
-            "name": "payload",
-            "required": true,
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/diagnosisModel"
+        "/diag/{search_id}": {
+            "parameters": [
+                {
+                    "name": "search_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "operationId": "get_diagnosis",
+                "tags": [
+                    "diagnosis"
+                ]
             }
-          }
-        ],
-        "tags": [
-          "diagnosis"
-        ]
-      },
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
         },
-        "operationId": "get_diagnosis",
-        "parameters": [
-          {
-            "name": "payload",
-            "required": true,
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/diagnosisID"
+        "/diags/": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/diagnosisFullModel"
+                            }
+                        }
+                    }
+                },
+                "operationId": "get_get_diagnosises",
+                "parameters": [
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "get all diagnosises"
+                ]
             }
-          }
-        ],
-        "tags": [
-          "diagnosis"
-        ]
-      },
-      "delete": {
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "operationId": "delete_diagnosis",
-        "parameters": [
-          {
-            "name": "payload",
-            "required": true,
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/diagnosisID"
-            }
-          }
-        ],
-        "tags": [
-          "diagnosis"
-        ]
-      }
-    },
-    "/diags/": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/diagnosisFullModel"
-              }
-            }
-          }
-        },
-        "operationId": "get_get_diagnosises",
-        "parameters": [
-          {
-            "name": "X-Fields",
-            "in": "header",
-            "type": "string",
-            "format": "mask",
-            "description": "An optional fields mask"
-          }
-        ],
-        "tags": [
-          "get all diagnosises"
-        ]
-      }
-    }
-  },
-  "info": {
-    "title": "Diagnosis records of Hospital Amrit",
-    "version": "1.0",
-    "description": "Diagnosis records of Hospital Amrit"
-  },
-  "produces": [
-    "application/json"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "tags": [
-    {
-      "name": "diagnosis",
-      "description": "Diagnosis records api controller"
-    },
-    {
-      "name": "get all diagnosises",
-      "description": "get all list of diagnosises"
-    }
-  ],
-  "definitions": {
-    "diagnosisFullModel": {
-      "required": [
-        "date",
-        "diagnosis",
-        "diagnosis_id",
-        "patient_id",
-        "patient_name"
-      ],
-      "properties": {
-        "patient_id": {
-          "type": "integer",
-          "description": "patient ID"
-        },
-        "diagnosis_id": {
-          "type": "integer",
-          "description": "diagnosis ID"
-        },
-        "patient_name": {
-          "type": "string",
-          "description": "patient name"
-        },
-        "diagnosis": {
-          "type": "string",
-          "description": "full diagnosis"
-        },
-        "date": {
-          "type": "string",
-          "description": "date of diagnosis"
         }
-      },
-      "type": "object"
     },
-    "diagnosisModel": {
-      "required": [
-        "date",
-        "diagnosis",
-        "patient_id",
-        "patient_name"
-      ],
-      "properties": {
-        "patient_id": {
-          "type": "integer",
-          "description": "patient ID"
+    "info": {
+        "title": "Diagnosis records of Hospital Amrit",
+        "version": "1.0",
+        "description": "Diagnosis records of Hospital Amrit"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "tags": [
+        {
+            "name": "diagnosis",
+            "description": "Diagnosis records api controller"
         },
-        "patient_name": {
-          "type": "string",
-          "description": "patient name"
-        },
-        "diagnosis": {
-          "type": "string",
-          "description": "full diagnosis"
-        },
-        "date": {
-          "type": "string",
-          "description": "date of diagnosis"
+        {
+            "name": "get all diagnosises",
+            "description": "get all list of diagnosises"
         }
-      },
-      "type": "object"
-    },
-    "diagnosisID": {
-      "required": [
-        "diagnosis_id"
-      ],
-      "properties": {
-        "diagnosis_id": {
-          "type": "integer",
-          "description": "diagnosis ID"
+    ],
+    "definitions": {
+        "diagnosisID": {
+            "required": [
+                "diagnosis_id"
+            ],
+            "properties": {
+                "diagnosis_id": {
+                    "type": "integer",
+                    "description": "diagnosis ID"
+                }
+            },
+            "type": "object"
+        },
+        "diagnosisModel": {
+            "required": [
+                "date",
+                "diagnosis",
+                "patient_id",
+                "patient_name"
+            ],
+            "properties": {
+                "patient_id": {
+                    "type": "integer",
+                    "description": "patient ID"
+                },
+                "patient_name": {
+                    "type": "string",
+                    "description": "patient name"
+                },
+                "diagnosis": {
+                    "type": "string",
+                    "description": "full diagnosis"
+                },
+                "date": {
+                    "type": "string",
+                    "description": "date of diagnosis"
+                }
+            },
+            "type": "object"
+        },
+        "diagnosisFullModel": {
+            "required": [
+                "date",
+                "diagnosis",
+                "diagnosis_id",
+                "patient_id",
+                "patient_name"
+            ],
+            "properties": {
+                "patient_id": {
+                    "type": "integer",
+                    "description": "patient ID"
+                },
+                "diagnosis_id": {
+                    "type": "integer",
+                    "description": "diagnosis ID"
+                },
+                "patient_name": {
+                    "type": "string",
+                    "description": "patient name"
+                },
+                "diagnosis": {
+                    "type": "string",
+                    "description": "full diagnosis"
+                },
+                "date": {
+                    "type": "string",
+                    "description": "date of diagnosis"
+                }
+            },
+            "type": "object"
         }
-      },
-      "type": "object"
-    }
-  },
-  "responses": {
-    "ParseError": {
-      "description": "When a mask can't be parsed"
     },
-    "MaskError": {
-      "description": "When any error occurs on mask"
+    "responses": {
+        "ParseError": {
+            "description": "When a mask can't be parsed"
+        },
+        "MaskError": {
+            "description": "When any error occurs on mask"
+        }
     }
-  }
 }
+

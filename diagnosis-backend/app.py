@@ -1,5 +1,5 @@
 '''
-patients model -
+patients diagnosis model -
 patient_id - int
 diagnosis_id - int
 name - str
@@ -8,12 +8,13 @@ date - str (in format yyyy-mm-dd)
 
 
 routes -
-GET - /patients - all patients id's and names
-GET - /patient - get all details of specific patient
-POST - /patient - add a record
-PUT - /patient - update a record
-POST - /patient - add a record
-DELETE - /patient - delete a record
+GET - /diags - all patients id's and names
+GET - /diag/id - get all details of specific patient
+POST - /diag - add a record
+PUT - /diag - update a record
+POST - /diag - add a record
+DELETE - /diag - delete a record
+Documentation - /doc - full SwaggerUI api documentation
 '''
 
 from flask import Flask

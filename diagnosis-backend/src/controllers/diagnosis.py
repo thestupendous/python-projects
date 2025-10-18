@@ -1,5 +1,5 @@
 '''
-patients model -
+patient diagnosis model -
 patient_id - int
 diagnosis_id - int
 name - str
@@ -8,12 +8,14 @@ date - str (in format yyyy-mm-dd)
 
 
 routes -
-GET - /patients - all patients id's and names
-GET - /patient - get all details of specific patient
-POST - /patient - add a record
-PUT - /patient - update a record
-POST - /patient - add a record
-DELETE - /patient - delete a record
+GET - /diags - all patients id's and names
+GET - /diag/id - get all details of specific patient
+POST - /diag - add a record
+PUT - /diag - update a record
+POST - /diag - add a record
+DELETE - /diag - delete a record
+Documentation - /doc - full SwaggerUI api documentation
+
 '''
 from flask_restx import Namespace, Resource, fields
 from typing import List
@@ -95,7 +97,6 @@ class GetDiagnosises(Resource):
         print("type of list->>>",type(diag_dict_list))
         print("size ->>",len(diag_dict_list))
         print("start[[[\n",diag_dict_list,"]]]end")
-        return json.loads(json.dumps(diag_dict_list)),200
         return diag_dict_list,200
 
             
@@ -118,7 +119,7 @@ class Diagnosis(Resource):
         print("got search id->>>> ",search_id)
         record = collection.find_one({"diagnosis_id":search_id})
         if not record:
-            return {"error":"DB error in finding or Record Not Found!"},404
+            return {"error":"Record Not Found!"},404
         # for record in found_record_cursor:
 
         record.pop("_id")
@@ -161,11 +162,14 @@ class Diagnosis(Resource):
         new_diag.diagnosis = got_record['diagnosis'] 
         new_diag.date = got_record['date'] 
 
-        return_obj = json.loads(json.dumps(new_diag,cls=diagnosis_model_encoder))
-        new_diag_dict = vars(new_diag)
+        # return_obj = json.loads(json.dumps(new_diag,cls=diagnosis_model_encoder))
+        # new_diag_dict = vars(new_diag)
+        new_diag_dict = new_diag.__dict__
+        print("inserting ->>>>",new_diag_dict)
         insert_result = collection.insert_one(new_diag_dict)
         if insert_result:
-            return return_obj, 200
+            # return return_obj, 200
+            return {"Success":"Inserted one record"}, 200
         else:
             return {"error":"monogo insert error"}, 501
 
@@ -194,7 +198,7 @@ class Diagnosis(Resource):
         if updated:
             return return_obj.__dict__, 200
         else:
-            return {"Error":"db error or Record not Found!"}, 404
+            return {"Error":"Record not Found!"}, 404
 
         # for diag in diagnosis_records:
         #     if diag.diagnosis_id == got_record['diagnosis_id']:
