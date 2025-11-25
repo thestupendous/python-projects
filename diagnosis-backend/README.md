@@ -10,6 +10,14 @@ management of diagnosis records of hospital amrit
   - run using gunicorn, exposing 8000 port, setting environment variable "MONGOHOST" as "localhost" \
     `gunicorn  app:app -e MONGOHOST=localhost -w 3`
 
+To run the app locally/ without gunicorn (for development works :-) )
+- after activating venv
+- install all requirements using requirements.txt
+- expose MONGOHOST variable as localhost
+  `export MONGOHOST="localhost" `
+- run this command -
+  `python3 app.py `
+
 ## api routes
 
 - GET - /diags - all patients id's and names

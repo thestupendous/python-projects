@@ -1,4 +1,12 @@
 '''
+To run the app locally,
+- after activating venv
+- install all requirements using requirements.txt
+- expose MONGOHOST variable as localhost
+  `export MONGOHOST="localhost" `
+- run this command -
+  `python3 app.py `
+
 patients diagnosis model -
 patient_id - int
 diagnosis_id - int
@@ -21,9 +29,6 @@ from flask import Flask
 from flask_restx import Api
 from src.controllers.diagnosis import diagController, getDiagsController
 
-
-
-
 app = Flask(__name__)
 api = Api(app,
           title="Diagnosis records of Hospital Amrit",
@@ -34,7 +39,6 @@ api = Api(app,
           )
 api.add_namespace(diagController)
 api.add_namespace(getDiagsController)
-
 
 if __name__ == '__main__':
     app.run('0.0.0.0',5005)
