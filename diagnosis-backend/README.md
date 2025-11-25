@@ -1,6 +1,15 @@
 # diagnosis records management of Hospital Amrit
 management of diagnosis records of hospital amrit
 
+## run guide
+- run mongodb instance 
+  - port 27017 should be exposed
+- run app
+  - install requirements \
+    `pip install -r requirements`
+  - run using gunicorn, exposing 8000 port, setting environment variable "MONGOHOST" as "localhost" \
+    `gunicorn  app:app -e MONGOHOST=localhost -w 3`
+
 ## api routes
 
 - GET - /diags - all patients id's and names

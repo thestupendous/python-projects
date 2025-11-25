@@ -20,11 +20,14 @@ Documentation - /doc - full SwaggerUI api documentation
 from flask_restx import Namespace, Resource, fields
 from typing import List
 import json
+import os
 from pymongo import MongoClient
 import bson.json_util as json_util # for _id of mongo documents
 
 try:
-    db_client = MongoClient("mongodb://localhost:27017")
+    mongo_host = os.environ["MONGOHOST"]
+    mongo_port = 27017
+    db_client = MongoClient(mongo_host,mongo_port)
     db = db_client["hospital"]
     collection = db["diagnosis_records"]
     collection2 = db["last_diagnosis_id"]
@@ -48,8 +51,7 @@ diagController = Namespace("diagnosis", path="/diag", description="Diagnosis rec
 getDiagsController = Namespace("get all diagnosises", path="/diags",
                                description="get all list of diagnosises")
 
-# TODO mongo db will replace this
-diagnosis_records: List[diagnosis_model] = []
+# diagnosis_records: List[diagnosis_model] = []
 
 diagFullModel = diagController.model("diagnosisFullModel",{
     'patient_id': fields.Integer(required=True, description="patient ID"),
